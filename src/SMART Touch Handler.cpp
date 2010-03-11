@@ -4,20 +4,17 @@ using namespace std;
 
 SMARTTouchHandler::SMARTTouchHandler()
 {
-	m_mouse = NULL;
 	// Remember window handle for later
-//	m_hwnd = 1234;
-	m_hwnd = FindWindow(TEXT("GLUT"), TEXT("WINDOWNAME"));
-	SetFocus(m_hwnd);
+//	m_hwnd = FindWindow(TEXT("GLUT"), TEXT("WINDOWNAME"));
+	//get the HWND
+	m_hwnd = WindowFromDC(wglGetCurrentDC());
 	
 	cout << "Attaching our window (hwnd: " << (INT64) m_hwnd << ") with the SMART Board SDK" << endl;
 	// Attach the SMART Board SDK to our window handle
 	m_sdk.SBSDKAttach(CSBSDKWnd(m_hwnd));
 	//m_sdk.SBSDKAttachWithMsgWnd(CSBSDKWnd(m_hwnd), false, CSBSDKWnd(m_hwnd));
 	if(!m_sdkadv.SBSDKIsConnected())
-	{
 		cout << "Error: Failed to connect to the SBSDK" << endl;
-	}
 
 	cout << "Registering touch event handlers" << endl;
 	// Enable us to handle SDK events
@@ -29,9 +26,7 @@ SMARTTouchHandler::SMARTTouchHandler()
 	cout << "Registering multi-touch event handler" << endl;
 	SBSDK_ERR err = m_sdkadv.SBSDKSendMultiPointContacts(true);
 	if(err != SBE_OK)
-	{
 		cout << "Error: " << "Unable to connect to a multi-touch device [" << err << "]" << endl;
-	}
 
 	// Tell all boards to never send mouse events
 	// Note: Since the SMART Table has no pen tray, this command is 
