@@ -195,6 +195,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\msaColor.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Segment.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Segment.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\SMART Touch Contact.cpp"
 				>
 			</File>

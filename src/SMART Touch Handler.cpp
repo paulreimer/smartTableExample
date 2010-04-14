@@ -8,6 +8,7 @@ SMARTTouchHandler::SMARTTouchHandler()
 //	m_hwnd = FindWindow(TEXT("GLUT"), TEXT("WINDOWNAME"));
 	//get the HWND
 	m_hwnd = WindowFromDC(wglGetCurrentDC());
+	m_mouse = NULL;
 	
 	cout << "Attaching our window (hwnd: " << (INT64) m_hwnd << ") with the SMART Board SDK" << endl;
 	// Attach the SMART Board SDK to our window handle
@@ -182,14 +183,14 @@ void SMARTTouchHandler::OnXYMove(int x, int y, int z, int iPointerID)
 //--------------------------------------------------------------
 void SMARTTouchHandler::mouseMoved(int x, int y)
 {
-	if(m_mouse)
+	if(m_mouse!=NULL)
 		m_mouse->UpdatePosition(x, y);
 }
 
 //--------------------------------------------------------------
 void SMARTTouchHandler::mousePressed(int x, int y, int button)
 {
-	if(!m_mouse)
+	if(m_mouse==NULL)
 	{
 		cout << "Mouse down" << endl;
 		m_mouse = new SMARTMouseContact();
@@ -201,7 +202,7 @@ void SMARTTouchHandler::mousePressed(int x, int y, int button)
 		}
 	}
 
-	if(m_mouse)
+	if(m_mouse!=NULL)
 	{
 		m_mouse->UpdatePosition(x, y);
 		m_mouse->SetButtons(button==GLUT_LEFT_BUTTON, button==GLUT_MIDDLE_BUTTON, button==GLUT_RIGHT_BUTTON);
@@ -211,7 +212,7 @@ void SMARTTouchHandler::mousePressed(int x, int y, int button)
 //--------------------------------------------------------------
 void SMARTTouchHandler::mouseReleased(int x, int y, int button)
 {
-	if(m_mouse)
+	if(m_mouse!=NULL)
 	{
 		m_mouse->UpdatePosition(x, y);
 		m_mouse->UnsetButtons(button==GLUT_LEFT_BUTTON, button==GLUT_MIDDLE_BUTTON, button==GLUT_RIGHT_BUTTON);
@@ -231,6 +232,6 @@ void SMARTTouchHandler::mouseReleased(int x, int y, int button)
 //--------------------------------------------------------------
 void SMARTTouchHandler::mouseDragged(int x, int y, int button)
 {
-	if(m_mouse)
+	if(m_mouse!=NULL)
 		m_mouse->UpdatePosition(x, y);
 }
