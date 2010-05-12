@@ -4,6 +4,7 @@
 #include "Segment.h"
 #include "msaColor.h"
 #include "SMART Touch Handler.h"
+#include "TuioThread.h"
 
 class testApp
 : public ofBaseApp
@@ -45,4 +46,6 @@ public:
 	int ticks;
 
 	SMARTTouchHandler handler;
+
+	TuioThread tuioThread;
 };

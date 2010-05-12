@@ -45,6 +45,8 @@ testApp::setup()
 			sequencer[i][j].setup();
 			sequencer[i][j].sound.setVolume(0.6);
 		}
+
+	tuioThread.setup();
 }
 
 //--------------------------------------------------------------
